@@ -1,0 +1,11 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  user_id: 1
+  likablke: one
+  likablke_type: Likablke
+
+two:
+  user_id: 1
+  likablke: two
+  likablke_type: Likablke

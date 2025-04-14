@@ -1,0 +1,35 @@
+<div class="grid grid-rows-auto gap-y-6 w-64 mx-auto mb-12">
+  <p> Hello, <%= Current.user.email_address %></p>
+  <%= link_to "Create new post", new_post_path, class: "inline-flex items-center rounded bg-indigo-600 px-4 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2" %>
+  <%= link_to "Show my posts", posts_path, class: "inline-flex items-center rounded bg-indigo-600 px-4 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2" %>
+</div>
+<div class="grid grid-cols-4 grid-rows-auto gap-6">
+  <% @post.each do |p| %>
+    <div class="grid grid-rows-3 gap-y-4 text-center bg-slate-600 rounded-xl p-4">
+      <h2 class="text-left">
+        <%= p.title %>
+      </h2>
+      <p>
+        <%= p.body %>
+      </p>
+      <div class="grid grid-rows-2">
+        <span>
+          Author: <%= p.user.email_address%>
+        </span>
+        <span>
+          Likes: <%= p.likes.count %>
+          <% if p.likes.any? %>
+            (Liked by: <%= p.likes.map { |like| like.user.email_address }.join(", ") %>)
+          <% end %>
+        </span>
+        <% if p.liked_by?(Current.user.id) %>
+          <span>Already Liked</span>
+        <% else %>
+          <%= form_with url: post_like_path(p), method: :post, class: "inline" do |f| %>
+            <%= f.submit "Like", class: "inline-flex items-center rounded bg-indigo-600 px-4 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2" %>
+          <% end %>
+        <% end %>
+      </div>
+    </div>
+  <% end %>
+</div>

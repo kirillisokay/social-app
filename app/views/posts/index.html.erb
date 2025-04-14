@@ -1,0 +1,18 @@
+<div class="mx-auto">
+  <h1 class="font-bold text-4xl text-center">Posts#index</h1>
+</div>
+<div class="grid grid-cols-4 grid-rows-auto gap-6">
+  <% @post.each do |p| %>
+    <div class="grid grid-rows-3 gap-y-4 text-center bg-slate-600 rounded-xl p-4">
+      <h2 class="text-left">
+        <%= p.title %>
+      </h2>
+      <p>
+        <%= p.body %>
+      </p>
+      <div class="grid grid-rows-2">
+        <span> Author: <%= p.user.email_address%></span>
+      </div>
+    </div>
+  <% end %>
+</div>

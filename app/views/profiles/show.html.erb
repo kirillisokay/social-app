@@ -1,0 +1,17 @@
+<div class="mb-6">
+  <h1 class="font-bold text-4xl">My profile</h1>
+</div>
+<div class="grid gap-6">
+  <%= Current.user.email_address %>
+  <%= link_to 'Update profile', edit_profile_path, class: " max-w-40 inline-flex items-center rounded bg-indigo-600 px-4 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"%>
+  <h2 class="mt-4 text-2xl">Posts I’ve Liked</h2>
+  <% if @user.liked_posts.any? %>
+    <ul>
+      <% @user.liked_posts.each do |post| %>
+        <li><%= post.title %> (Likes: <%= post.likes.count %>)</li>
+      <% end %>
+    </ul>
+  <% else %>
+    <p>No posts liked yet.</p>
+  <% end %>
+</div>
